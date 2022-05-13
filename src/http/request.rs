@@ -19,6 +19,16 @@ impl TryFrom<&[u8]> for Request {
     }
 }
 
+fn get_next_word(request:&str) ->Option<(&str,&str)> {
+    for (i,v) in request.chars().enumerate(){
+        if v == ' ' {
+            return Some((&request[..i],&request[i+1..]));
+        }
+    }    
+
+    return None;
+}
+
 pub enum ParseError {
     InvalidRequest,
     InvalidEncoding,
