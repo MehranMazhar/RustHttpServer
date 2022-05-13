@@ -1,4 +1,4 @@
-use super::method::{Method,MethodError};
+use super::method::{Method, MethodError};
 use std::error::Error;
 use std::fmt::{Debug, Display, Formatter, Result as FmtResult};
 use std::str;
@@ -26,10 +26,9 @@ impl TryFrom<&[u8]> for Request {
         }
 
         let method: Method = method.parse()?;
-        
         let mut query_string = None;
-        if let Some(i) = path.find('?'){
-            query_string = Some(&path[i..]);
+        if let Some(i) = path.find('?') {
+            query_string = Some(&path[i + 1..]);
             path = &path[..i];
         }
 
